@@ -85,8 +85,27 @@ function SpawnVehicle(vehicle, pos, heading)
 
         local _vehicle = CreateVehicle(vehicle, pos.x, pos.y, pos.z, heading and heading or 0, false, false)
         SetModelAsNoLongerNeeded(vehicle)
-        
+
         return _vehicle
+    end
+end
+
+function SpawnPed(pedType, ped, pos, heading)
+    if IsClient() then
+        if not HasModelLoaded(ped) then
+            RequestModel(ped)
+
+            while not HasModelLoaded(ped) do
+                Citizen.Wait(1)
+            end
+        end
+
+        local _ped = CreatePed(pedType and pedType or 4, ped, pos.x, pos.y, pos.z, heading and heading or 0, true, false)
+
+        SetPedDefaultComponentVariation(_ped)
+        SetModelAsNoLongerNeeded(ped)
+        
+        return _ped
     end
 end
 
