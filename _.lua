@@ -73,6 +73,21 @@ function GetPedHeadshot()
     return _b
 end
 
+function SpawnVehicle(vehicle, pos, heading)
+    if IsClient() then
+        if not HasModelLoaded(vehicle) then
+            RequestModel(vehicle)
+
+            while not HasModelLoaded(vehicle) do
+                Citizen.Wait(1)
+            end
+        end
+
+        local _vehicle = CreateVehicle(vehicle, pos.x, pos.y, pos.z, heading and heading or 0, false, false)
+        return _vehicle
+    end
+end
+
 -- Please keep this watermark.
 print("")
 print("_____________________________________________________________________")
