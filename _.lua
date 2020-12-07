@@ -84,6 +84,8 @@ function SpawnVehicle(vehicle, pos, heading)
         end
 
         local _vehicle = CreateVehicle(vehicle, pos.x, pos.y, pos.z, heading and heading or 0, false, false)
+        SetModelAsNoLongerNeeded(vehicle)
+        
         return _vehicle
     end
 end
